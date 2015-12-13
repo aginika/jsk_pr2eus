@@ -741,6 +741,11 @@ send-action [ send message to action server, it means robot will move ]"
                        controller-actions)))
      (when act
        (send act :wait-for-result :timeout timeout))))
+
+  (:wait-move-base (&optional (timeout 0))
+                   (send move-base-action :wait-for-result)
+                   (ros::ros-info "~A move-base reuslt "(send move-base-action :get-state))
+                   )
   ;;;
   (:robot-interface-simulation-callback ()
    (let ((orig-coords (send robot :copy-worldcoords))
